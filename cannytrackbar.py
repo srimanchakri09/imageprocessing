@@ -13,6 +13,6 @@ while True:
     th2=cv2.getTrackbarPos('TH2','image')
     canny=cv2.Canny(img,th1,th2)
     cv2.imshow('image',img)
-    if cv2.waitKey==27:
+    if cv2.waitKey(1)==27:
         break
 cv2.destroyAllWindows()

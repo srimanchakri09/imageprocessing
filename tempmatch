@@ -1,0 +1,20 @@
+import cv2
+import numpy as np
+img=cv2.imread('messi5.jpg')
+gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+temp=cv2.imread("messiface.jpg",0)#it is the croped image should be added ino the project it shoild be loaded in grayscale
+w,h=temp.shape[::-1]#we nedd to find the shape of the loaded image since it gives rows,colounms we need to swap so that the coordinates will set so we use[::-1]
+#argument in the opencv the x,y co-ordinates are unlike the mathematical graphs they are revsersed
+res=cv2.matchTemplate(gray,temp,cv2.TM_CCOEFF_NORMED)#matchTemplate function is used for matching of the two images and gives the result of array of matrix which
+#consists of the points of the matched images of the original image
+print(res)#we get the array of the matrices
+thresh=0.8#we need to set the limit for geting the brightest point in the array of the points and that point will be top left corner of the loaded image ones
+loc=np.where(res>=thresh)#this method saperates alll values from array which are less than the thresh value and gives array of x , y co-ordinates top left corner
+# based on thresh value these values vary in quantity
+print(loc)
+for pt in zip(*loc[::-1]):#as we can have many images similar to the temp ones so we nned itterate them and again we need to change to co-ordinates so[::-1]
+    cv2.rectangle(img,pt,(pt[0]+w,pt[1]+h),(0,0,255),2)
+cv2.imshow('image',img)
+cv2.imshow('faceimage',temp)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

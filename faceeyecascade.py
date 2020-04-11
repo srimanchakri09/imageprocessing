@@ -16,7 +16,7 @@ while True:
         cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),3)#drawing the rectangle on the faces
         roigray=gray[y:y+h,x:x+w]#creating region of intrest of face since eyes are in the face roi of gray for cascadin the eyes
         roicolor=img[y:y+h,x:x+w]#roi of color is for drawing the rectangles
-        eyes=eyecascade.detectMultiScale(gray)#the other two arguments are not mandatory it also gives the four arguments
+        eyes=eyecascade.detectMultiScale(roigray)#the other two arguments are not mandatory it also gives the four arguments
         print(eyes)
         for (ex,ey,ew,eh) in eyes:
             cv2.rectangle(roicolor,(ex,ey),(ex+w,ey+eh),(0,255,0),2)#creating rectangle on the eyes
